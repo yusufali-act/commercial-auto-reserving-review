@@ -1,0 +1,31 @@
+{
+  "company": "Pennsylvania Natl Ins Grp",
+  "valuation": "31/12/1997",
+  "units": "USD 000, net of reinsurance",
+  "selected_unpaid": 70522,
+  "selected_ibnr": 33233,
+  "selected_range_p25_p75": [
+    66279,
+    74478
+  ],
+  "selected_p95": 80995,
+  "selected_p99_5": 87784,
+  "selected_cv": 0.087,
+  "method_unpaid": {
+    "CL paid": 90088,
+    "CL case": 69235,
+    "BF paid": 61504,
+    "BF case": 61699,
+    "Cape Cod paid": 72310,
+    "Cape Cod case": 65462,
+    "Gen. Cape Cod case": 67042,
+    "Benktander case": 68546
+  },
+  "posted_reserve_97": 75716,
+  "actual_unpaid_hindsight": 68691,
+  "mack_paid_se": 7615,
+  "mack_case_se": 5997,
+  "bootstrap_paid_mean": 88471,
+  "bootstrap_paid_p99_5": 109180,
+  "bootstrap_paid_p0_5": 70405
+}

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+      - name: Tests (methods validated against published figures and chainladder)
+        run: pytest -q
+      - name: Reproduce headline results from the raw CAS data
+        run: |
+          python -m reserving.pipeline > /tmp/results.json
+          python - <<'PY'
+          import json
+          new = json.load(open("outputs/results.json"))
+          assert 65_000 < new["selected_unpaid"] < 76_000, new["selected_unpaid"]
+          print("selected unpaid:", new["selected_unpaid"])
+          PY
+      - name: Execute notebooks
+        run: |
+          python -m ipykernel install --user --name python3
+          cd notebooks
+          for nb in 0*.ipynb; do jupyter nbconvert --to notebook --execute --output /tmp/$nb $nb; done
